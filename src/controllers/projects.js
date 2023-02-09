@@ -1,6 +1,6 @@
-const { validationResult } = require('express-validator')
-const ProjectModels = require('../models/project')
-exports.CreateProjectsControllers = (req, res) => {
+import { validationResult } from 'express-validator'
+import ProjectModels from '../models/project'
+export function CreateProjectsControllers(req, res) {
     const error = validationResult(req)
 
     if (!error.isEmpty()) {
@@ -30,7 +30,7 @@ exports.CreateProjectsControllers = (req, res) => {
         })
 }
 
-exports.getAllProjectControllers = (req, res, next) => {
+export function getAllProjectControllers(req, res, next) {
     const currentPage = req.query.page || 1;
     const perPage = req.query.perPage || 5;
     let totalItems;
@@ -56,7 +56,7 @@ exports.getAllProjectControllers = (req, res, next) => {
         })
 }
 
-exports.getDataProjectById = (req, res, next) => {
+export function getDataProjectById(req, res, next) {
     const ProjectId = req.params.projectId
     ProjectModels.findById(ProjectId)
         .then(result => {

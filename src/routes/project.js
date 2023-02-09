@@ -1,9 +1,9 @@
-const express = require('express')
-const { body } = require('express-validator')
-const ProjectsControllers = require('../controllers/projects')
-const router = express.Router()
+import { Router } from 'express'
+import { body } from 'express-validator'
+import { CreateProjectsControllers, getAllProjectControllers, getDataProjectById } from '../controllers/projects'
+const router = Router()
 
-router.post('/post', [body('title').isLength({ min: 5 }).withMessage('input title tidak sesuai'),body('description').isLength({ min: 5 }).withMessage('input description tidak sesuai')], ProjectsControllers.CreateProjectsControllers)
-router.get('/posts', ProjectsControllers.getAllProjectControllers)
-router.get('/post/:ProjectId', ProjectsControllers.getDataProjectById)
-module.exports = router
+router.post('/post', [body('title').isLength({ min: 5 }).withMessage('input title tidak sesuai'),body('description').isLength({ min: 5 }).withMessage('input description tidak sesuai')], CreateProjectsControllers)
+router.get('/posts', getAllProjectControllers)
+router.get('/post/:ProjectId', getDataProjectById)
+export default router

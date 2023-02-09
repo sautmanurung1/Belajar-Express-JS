@@ -1,9 +1,9 @@
-const { validationResult } = require('express-validator')
-const bcrypt = require('bcrypt')
+import { validationResult } from 'express-validator'
+import { hashSync, compare } from 'bcrypt'
 const saltRounds = 10
-const UserModels = require('../models/auth')
+import UserModels from '../models/auth'
 
-exports.RegisterUserController = (req, res) => {
+export function RegisterUserController(req, res) {
     const error = validationResult(req)
 
     if (!error.isEmpty()) {
@@ -16,7 +16,7 @@ exports.RegisterUserController = (req, res) => {
     const name = req.body.name
     const email = req.body.email
     const password = req.body.password
-    const HashPassword = bcrypt.hashSync(password, saltRounds)
+    const HashPassword = hashSync(password, saltRounds)
 
     const Post = new UserModels({
         name: name,
@@ -38,12 +38,12 @@ exports.RegisterUserController = (req, res) => {
 }
 
 
-exports.LoginUserController = (req, res) => {
+export function LoginUserController(req, res) {
     const email = req.body.email
     const password = req.body.password
     const newData = UserModels.findOne({ email: email }).exec()
     newData.then(result => {
-        bcrypt.compare(password, result.password, function (err, isMatch) {
+        compare(password, result.password, function (err, isMatch) {
             if (!isMatch) {
                 return err = errors()
             } else {

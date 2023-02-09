@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const Schemas = mongoose.Schema
+import { Schema, model } from 'mongoose'
+const Schemas = Schema
 
 const Auhtentication = new Schemas({
     name: {
@@ -21,4 +21,4 @@ const Auhtentication = new Schemas({
     }
 })
 
-module.exports = mongoose.model('Authentication', Auhtentication)
+export default model('Authentication', Auhtentication)

@@ -1,13 +1,13 @@
-const express = require('express')
-const mongoose = require('mongoose')
+import express, { json } from 'express'
+import { set, connect } from 'mongoose'
 const app = express()
-const projectRoutes = require('./src/routes/project')
-const authRoutes = require('./src/routes/auth')
-const dotenv = require('dotenv')
+import projectRoutes from './src/routes/project'
+import authRoutes from './src/routes/auth'
+import { config } from 'dotenv'
 const port = 3000
-dotenv.config()
+config()
 
-app.use(express.json())
+app.use(json())
 app.get('/', (req, res) => {
     res.send('Saut Manurung')
 })
@@ -18,8 +18,8 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
 
-mongoose.set('strictQuery', true)
-mongoose.connect(process.env.mongodb)
+set('strictQuery', true)
+connect(process.env.mongodb)
     .then(() => {
         app.listen(4000, () => console.log('Connection Success'))
     })
