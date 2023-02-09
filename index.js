@@ -1,7 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
-const projectRoutes = require('../belajar-express/src/routes/project')
+const projectRoutes = require('./src/routes/project')
+const authRoutes = require('./src/routes/auth')
 // const path = require('path')
 // const fileStorage = multer.diskStorage({
 //     destination: (req, file, cb) => {
@@ -11,7 +12,6 @@ const projectRoutes = require('../belajar-express/src/routes/project')
 //         cb(null, Date.now() + '-' + file.originalname)
 //     }
 // })
-
 const port = 3000
 
 app.use(express.json())
@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/v1/project', projectRoutes)
+app.use('/v1/project', authRoutes)
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })

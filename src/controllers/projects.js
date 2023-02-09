@@ -55,3 +55,22 @@ exports.getAllProjectControllers = (req, res, next) => {
             next(err)
         })
 }
+
+exports.getDataProjectById = (req, res, next) => {
+    const ProjectId = req.params.projectId
+    ProjectModels.findById(ProjectId)
+        .then(result => {
+            if (!result) {
+                const error = new Error('Project Data tidak ditemukan')
+                error.errorStatus = 404
+                throw error
+            }
+            res.status(200).json({
+                message: "Data Project Berhasil di panggil",
+                data: result,
+            })
+        })
+        .catch(err => {
+            next(err)
+        });
+}
