@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const app = express()
 const projectRoutes = require('./src/routes/project')
 const authRoutes = require('./src/routes/auth')
+const dotenv = require('dotenv')
 // const path = require('path')
 // const fileStorage = multer.diskStorage({
 //     destination: (req, file, cb) => {
@@ -13,6 +14,7 @@ const authRoutes = require('./src/routes/auth')
 //     }
 // })
 const port = 3000
+dotenv.config()
 
 app.use(express.json())
 app.get('/', (req, res) => {
@@ -26,7 +28,7 @@ app.listen(port, () => {
 })
 
 mongoose.set('strictQuery', true)
-mongoose.connect('mongodb://mongo:4LO8PZ2IDCxnSARloqrT@containers-us-west-174.railway.app:7846')
+mongoose.connect(process.env.mongodb)
     .then(() => {
         app.listen(4000, () => console.log('Connection Success'))
     })
