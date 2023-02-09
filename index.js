@@ -4,15 +4,6 @@ const app = express()
 const projectRoutes = require('./src/routes/project')
 const authRoutes = require('./src/routes/auth')
 const dotenv = require('dotenv')
-// const path = require('path')
-// const fileStorage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, '../belajar-express/src/public')
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, Date.now() + '-' + file.originalname)
-//     }
-// })
 const port = 3000
 dotenv.config()
 
